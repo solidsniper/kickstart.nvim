@@ -628,7 +628,13 @@ require('lazy').setup({
       local vue_language_server_path = '/usr/lib/node_modules/@vue/language-server'
       local servers = {
         clangd = {},
-        gopls = {},
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+          },
+        },
         -- pyright = {},
         cssls = {},
         jsonls = {},
