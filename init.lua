@@ -430,6 +430,17 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'olexsmir/gopher.nvim',
+    ft = 'go',
+    -- branch = "develop"
+    -- (optional) will update plugin's deps on every update
+    build = function()
+      vim.cmd.GoInstallDeps()
+    end,
+    ---@type gopher.Config
+    opts = {},
+  },
   { 'Bilal2453/luvit-meta', lazy = true },
   {
     -- Main LSP Configuration
