@@ -300,6 +300,19 @@ require('lazy').setup({
     end,
   },
 
+  -- tailwind-tools.lua
+  {
+    'luckasRanarison/tailwind-tools.nvim',
+    name = 'tailwind-tools',
+    build = ':UpdateRemotePlugins',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim', -- optional
+      'neovim/nvim-lspconfig', -- optional
+    },
+    opts = {}, -- your configuration
+  },
+
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
@@ -463,7 +476,24 @@ require('lazy').setup({
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
+      'hrsh7th/nvim-cmp',
+      dependencies = {
+        'tailwind-tools',
+        'onsails/lspkind-nvim',
+        -- ...
+      },
+      opts = function()
+        return {
+          -- ...
+          formatting = {
+            format = require('lspkind').cmp_format {
+              before = require('tailwind-tools.cmp').lspkind_format,
+            },
+          },
+        }
+      end,
     },
+
     config = function()
       -- Brief aside: **What is LSP?**
       --
@@ -796,7 +826,7 @@ require('lazy').setup({
         'some-sass-language-server',
         'stylua',
         'svelte-language-server',
-        -- 'tailwindcss-language-server',
+        'tailwindcss-language-server',
         'templ',
         'twiggy-language-server',
         'typescript-language-server',
@@ -885,12 +915,12 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
         opts = {},
       },
@@ -921,7 +951,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'enter',
+        preset = 'default',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
