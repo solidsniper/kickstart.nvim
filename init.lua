@@ -192,6 +192,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>', { desc = 'Open Gitsigns preview_hunk', silent = true, noremap = true })
 vim.keymap.set('n', 'gup', ':Gitsigns reset_hunk<CR>', { desc = 'Undo Gitsigns preview_hunk', silent = true, noremap = true })
 
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Move down and center' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Move up and center' })
+
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
