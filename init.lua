@@ -729,39 +729,6 @@ require('lazy').setup({
         bashls = {},
         rust_analyzer = {},
 
-        volar = {
-
-          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-
-          init_options = {
-            vue = {
-              hybridMode = false,
-            },
-          },
-          settings = {
-            typescript = {
-              inlayHints = {
-                enumMemberValues = {
-                  enabled = true,
-                },
-                functionLikeReturnTypes = {
-                  enabled = true,
-                },
-                propertyDeclarationTypes = {
-                  enabled = true,
-                },
-                parameterTypes = {
-                  enabled = true,
-                  suppressWhenArgumentMatchesName = true,
-                },
-                variableTypes = {
-                  enabled = true,
-                },
-              },
-            },
-          },
-        },
-
         -- TypeScript
         ts_ls = {
           init_options = {
@@ -843,7 +810,6 @@ require('lazy').setup({
         'rust-analyzer',
         'shellharden',
         'shfmt',
-        'volar',
         'some-sass-language-server',
         'stylua',
         'svelte-language-server',
