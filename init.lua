@@ -321,19 +321,6 @@ require('lazy').setup({
     end,
   },
 
-  -- tailwind-tools.lua
-  -- {
-  --   'luckasRanarison/tailwind-tools.nvim',
-  --   name = 'tailwind-tools',
-  --   build = ':UpdateRemotePlugins',
-  --   dependencies = {
-  --     'nvim-treesitter/nvim-treesitter',
-  --     'nvim-telescope/telescope.nvim', -- optional
-  --     'neovim/nvim-lspconfig', -- optional
-  --   },
-  --   opts = {}, -- your configuration
-  -- },
-
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
@@ -485,6 +472,7 @@ require('lazy').setup({
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
+    opts = {},
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'mason-org/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
@@ -499,18 +487,12 @@ require('lazy').setup({
       'saghen/blink.cmp',
       'hrsh7th/nvim-cmp',
       dependencies = {
-        'tailwind-tools',
         'onsails/lspkind-nvim',
         -- ...
       },
       opts = function()
         return {
           -- ...
-          formatting = {
-            format = require('lspkind').cmp_format {
-              before = require('tailwind-tools.cmp').lspkind_format,
-            },
-          },
         }
       end,
     },
@@ -729,6 +711,18 @@ require('lazy').setup({
         bashls = {},
         rust_analyzer = {},
 
+        -- hyprls
+        hyprls = {
+          cmd = { 'hyprls' },
+          pattern = { '*.hl', 'hypr*.conf' },
+          settings = {
+            hyprls = {
+              preferIgnoreFile = false,
+              ignore = { 'hyprlock.conf', 'hypridle.conf' },
+            },
+          },
+        },
+
         -- TypeScript
         ts_ls = {
           init_options = {
@@ -784,6 +778,8 @@ require('lazy').setup({
         'beautysh',
         -- 'biome',
         'bzl',
+        'hyprls',
+        'tailwindcss',
         'cbfmt',
         'clang-format',
         'cpplint',
@@ -813,7 +809,6 @@ require('lazy').setup({
         'some-sass-language-server',
         'stylua',
         'svelte-language-server',
-        'tailwindcss-language-server',
         'templ',
         'twiggy-language-server',
         'typescript-language-server',
@@ -970,6 +965,15 @@ require('lazy').setup({
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
+    },
+  },
+
+  {
+    'NvChad/nvim-colorizer.lua',
+    opts = {
+      user_default_options = {
+        tailwind = true,
+      },
     },
   },
 
