@@ -268,6 +268,24 @@ require('lazy').setup({
       },
     },
   },
+  { -- Markdown preview
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && yarn install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
+  { -- syntax highlighting for chezmoi managed files
+    'alker0/chezmoi.vim',
+    lazy = false,
+    init = function()
+      -- This option is required.
+      vim.g['chezmoi#use_tmp_buffer'] = true
+      -- add other options here if needed.
+    end,
+  },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -777,7 +795,6 @@ require('lazy').setup({
         'bash-language-server',
         'beautysh',
         -- 'biome',
-        'bzl',
         'hyprls',
         'tailwindcss',
         'cbfmt',
@@ -1046,6 +1063,12 @@ require('lazy').setup({
       auto_install = true,
       highlight = {
         enable = true,
+        disable = function()
+          -- check if 'filetype' option includes 'chezmoitmpl'
+          if string.find(vim.bo.filetype, 'chezmoitmpl') then
+            return true
+          end
+        end,
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
