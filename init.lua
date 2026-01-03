@@ -1054,7 +1054,6 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
     build = ':TSUpdate',
     config = function()
       local ts = require 'nvim-treesitter'
